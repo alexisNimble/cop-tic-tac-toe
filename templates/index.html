@@ -1,0 +1,104 @@
+<!--
+This is the index.html file for the Tic Tac Toe game. It contains the HTML structure and styling for the game interface.
+
+HTML Structure:
+- The file starts with the doctype declaration and the opening html tag.
+- Inside the html tag, there is the head section and the body section.
+- The head section contains the title of the game.
+- The body section contains the game status, a form to reset the game, and a table to display the game board.
+
+Styling:
+- The body has a background color, margin, and padding.
+- The h1 tag has text alignment and color.
+- The form has text alignment and margin.
+- The button has a background color, text color, padding, border, border radius, cursor, and font size.
+- The table has margin and border-collapse.
+- The td (table cell) has width, height, text alignment, vertical alignment, font size, background color, and border.
+- The td:hover (hover effect) changes the background color.
+
+Dynamic Content:
+- The game status is displayed using the {{ game_status }} variable.
+- The form action attribute is set to "/reset" to reset the game.
+- The button inside the form is used to submit the form and play again.
+- The table is dynamically generated using a for loop.
+- The row and col variables are used to generate the input fields and buttons for each cell.
+- The board[row][col] variable is used to display the current value of each cell.
+
+Note: This code is a template and may require integration with a backend server to handle game logic and data.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        table {
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        td {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 35px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+
+        td:hover {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ game_status }}</h1>
+    <form action="/reset" method="post">
+        <button type="submit">Play Again</button>
+    </form>
+    <table>
+        {% for row in range(3) %}
+        <tr>
+            {% for col in range(3) %}
+            <td>
+                <form action="/move" method="post">
+                    <input type="hidden" name="row" value="{{ row }}">
+                    <input type="hidden" name="col" value="{{ col }}">
+                    <button type="submit" style="width:100%; height:100%; font-size:35px;">
+                        {{ board[row][col] }}
+                    </button>
+                </form>
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
