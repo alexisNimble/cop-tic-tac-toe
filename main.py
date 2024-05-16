@@ -9,55 +9,24 @@ class Player:
         self.symbol = symbol
 
 class TicTacToe:
-    """
-    Represents a Tic-Tac-Toe game.
-
-    Attributes:
-        board (List[List[str]]): The game board represented as a 3x3 grid.
-        players (List[Player]): The list of players participating in the game.
-        current_player (Optional[Player]): The player who is currently making a move.
-    """
-
     def __init__(self):
         self.board: List[List[str]] = [['', '', ''], ['', '', ''], ['', '', '']]
         self.players: List[Player] = []
         self.current_player: Optional[Player] = None
 
     def add_player(self, name: str, symbol: str) -> None:
-        """
-        Adds a player to the game.
-
-        Args:
-            name (str): The name of the player.
-            symbol (str): The symbol representing the player's moves on the board.
-
-        Returns:
-            None
-        """
         player = Player(name, symbol)
         self.players.append(player)
         if self.current_player is None:
             self.current_player = player
 
     def switch_player(self) -> None:
-        """
-        Switches the current player to the next player in the list.
-
-        Returns:
-            None
-        """
         if self.current_player == self.players[0]:
             self.current_player = self.players[1]
         else:
             self.current_player = self.players[0]
 
     def check_winner(self) -> Optional[str]:
-        """
-        Checks if there is a winner in the current state of the game.
-
-        Returns:
-            Optional[str]: The symbol of the winning player, 'Tie' if it's a tie, or None if there is no winner yet.
-        """
         # Check rows
         for row in self.board:
             if row[0] == row[1] == row[2] != '':
@@ -77,19 +46,6 @@ class TicTacToe:
         return None
 
     def move(self, row: int, col: int) -> None:
-        """
-        Makes a move on the game board.
-
-        Args:
-            row (int): The row index of the cell to make the move.
-            col (int): The column index of the cell to make the move.
-
-        Raises:
-            Exception: If there is no current player set.
-
-        Returns:
-            None
-        """
         if self.current_player is None:
             raise Exception("No current player set")
         # Make the move if the cell is empty
